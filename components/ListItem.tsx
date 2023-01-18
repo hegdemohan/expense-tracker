@@ -4,12 +4,13 @@ import { theme } from "../theme/Theme";
 import { Swipeable } from "react-native-gesture-handler";
 
 type Props = {
-  label: string;
+  label: string | JSX.Element;
   details?: JSX.Element;
-  onClick(): void;
+  onClick?(): void;
   swipeToDelete?(): void;
   onDelete?(): void;
   isDestructive?: boolean;
+  color?: string;
 };
 
 export const ListItem = ({
@@ -19,6 +20,7 @@ export const ListItem = ({
   swipeToDelete,
   onDelete,
   isDestructive,
+  color,
 }: Props) => {
   const item = useMemo(
     () => (
@@ -33,8 +35,20 @@ export const ListItem = ({
           padding: 20,
           width: "100%",
         }}
+        disabled={onClick ? false : true}
         onPress={onClick}
       >
+        {color && (
+          <View
+            style={{
+              backgroundColor: color,
+              height: 16,
+              width: 16,
+              borderRadius: 8,
+              marginRight: 8,
+            }}
+          />
+        )}
         <Text
           style={{
             fontSize: 18,

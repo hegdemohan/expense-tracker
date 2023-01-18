@@ -1,53 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { Budget, Expenses, Income, Settings } from "./screens";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { Categories } from "./screens/Categories";
+import { Home } from "./screens/Home";
 import { theme } from "./theme/Theme";
-import TabBarIcons from "./components/TabBarIcons";
 
-const Tab = createBottomTabNavigator();
-
+const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer theme={theme}>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarStyle: {
-            backgroundColor: theme.colors.card,
-          },
-        }}
-      >
-        <Tab.Screen
-          options={{
-            tabBarIcon: (props) => <TabBarIcons type={"expense"} {...props} />,
-          }}
-          name="Expenses"
-          component={Expenses}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="home"
+          component={Home}
+          options={{ headerShown: false }}
         />
-        <Tab.Screen
-          options={{
-            tabBarIcon: (props) => <TabBarIcons type={"budget"} {...props} />,
-          }}
-          name="Budget"
-          component={Budget}
-        />
-        <Tab.Screen
-          options={{
-            tabBarIcon: (props) => <TabBarIcons type={"income"} {...props} />,
-          }}
-          name="Income"
-          component={Income}
-        />
-        <Tab.Screen
-          options={{
-            tabBarIcon: (props) => <TabBarIcons type={"settings"} {...props} />,
-          }}
-          name="Settings"
-          component={Settings}
-        />
-      </Tab.Navigator>
+        <Stack.Screen name="categories" component={Categories} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
