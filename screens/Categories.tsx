@@ -1,28 +1,32 @@
+import { Feather, SimpleLineIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
-  Animated,
   Button,
+  FlatList,
   KeyboardAvoidingView,
   Modal,
   Platform,
   SafeAreaView,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useCallback, useState } from "react";
-import { ListItem } from "../components/ListItem";
-import uuid from "react-native-uuid";
-import { RectButton, Swipeable, TextInput } from "react-native-gesture-handler";
-import { theme } from "../theme/Theme";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { ColorPicker, fromHsv } from "react-native-color-picker";
-import { Feather } from "@expo/vector-icons";
+import {
+  GestureHandlerRootView,
+  RectButton,
+  TextInput,
+} from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import uuid from "react-native-uuid";
+import { ListItem } from "../components/ListItem";
+import { theme } from "../theme/Theme";
 
 type Category = {
   id: string;
   name: string;
   color: string;
 };
+
 export const Categories = () => {
   const [newCategory, setNewCategory] = useState("");
   const [openColorPicker, setOpenColorPicker] = useState(false);
@@ -60,47 +64,25 @@ export const Categories = () => {
         margin: 16,
       }}
     >
-      <View
+      <FlatList
+        data={categories}
+        renderItem={({ item }) => (
+          <Category
+            category={item}
+            onPress={() =>
+              setCategories(categories.filter(({ id }) => id !== item.id))
+            }
+          />
+        )}
+        keyExtractor={(item) => item.id}
         style={{
           borderRadius: 11,
           overflow: "hidden",
         }}
-      >
-        {categories.map((category) => (
-          <Swipeable
-            key={category.id}
-            renderRightActions={() => {
-              return (
-                <RectButton
-                  style={{
-                    backgroundColor: theme.colors.error,
-                    alignItems: "center",
-                    width: 50,
-                    justifyContent: "center",
-                  }}
-                  onPress={() =>
-                    setCategories(
-                      categories.filter(({ id }) => id !== category.id)
-                    )
-                  }
-                >
-                  <Feather name="trash" size={28} color="white" />
-                </RectButton>
-              );
-            }}
-          >
-            <ListItem
-              key={category.id}
-              label={category.name}
-              color={category.color}
-            />
-          </Swipeable>
-        ))}
-      </View>
-      <View style={{ flex: 1 }} />
+      />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={25}
+        keyboardVerticalOffset={120}
       >
         <View
           style={{
@@ -172,5 +154,36 @@ export const Categories = () => {
         </View>
       </Modal>
     </SafeAreaView>
+  );
+};
+
+type CategoryProps = {
+  category: Category;
+  onPress(): void;
+};
+
+const Category = ({ category, onPress }: CategoryProps) => {
+  const { color, id, name } = category;
+  return (
+    <Swipeable
+      key={id}
+      renderRightActions={() => {
+        return (
+          <RectButton
+            style={{
+              backgroundColor: theme.colors.error,
+              alignItems: "center",
+              width: 50,
+              justifyContent: "center",
+            }}
+            onPress={onPress}
+          >
+            <Feather name="trash" size={28} color="white" />
+          </RectButton>
+        );
+      }}
+    >
+      <ListItem key={id} label={name} color={color} />
+    </Swipeable>
   );
 };

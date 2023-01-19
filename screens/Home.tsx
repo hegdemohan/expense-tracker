@@ -31,7 +31,7 @@ export const Home = () => {
       />
       <Tab.Screen
         options={{
-          tabBarIcon: (props) => <TabBarIcons type={"income"} {...props} />,
+          tabBarIcon: (props) => <TabBarIcons type={"add"} {...props} />,
         }}
         name="Income"
         component={Income}
