@@ -1,4 +1,5 @@
 import {
+  Animated,
   Button,
   KeyboardAvoidingView,
   Modal,
@@ -8,13 +9,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ListItem } from "../components/ListItem";
 import uuid from "react-native-uuid";
-import { TextInput } from "react-native-gesture-handler";
+import { RectButton, Swipeable, TextInput } from "react-native-gesture-handler";
 import { theme } from "../theme/Theme";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { ColorPicker, fromHsv } from "react-native-color-picker";
+import { Feather } from "@expo/vector-icons";
 
 type Category = {
   id: string;
@@ -50,6 +52,7 @@ export const Categories = () => {
     ]);
     setNewCategory("");
   };
+
   return (
     <SafeAreaView
       style={{
@@ -64,11 +67,34 @@ export const Categories = () => {
         }}
       >
         {categories.map((category) => (
-          <ListItem
+          <Swipeable
             key={category.id}
-            label={category.name}
-            color={category.color}
-          />
+            renderRightActions={() => {
+              return (
+                <RectButton
+                  style={{
+                    backgroundColor: theme.colors.error,
+                    alignItems: "center",
+                    width: 50,
+                    justifyContent: "center",
+                  }}
+                  onPress={() =>
+                    setCategories(
+                      categories.filter(({ id }) => id !== category.id)
+                    )
+                  }
+                >
+                  <Feather name="trash" size={28} color="white" />
+                </RectButton>
+              );
+            }}
+          >
+            <ListItem
+              key={category.id}
+              label={category.name}
+              color={category.color}
+            />
+          </Swipeable>
         ))}
       </View>
       <View style={{ flex: 1 }} />
