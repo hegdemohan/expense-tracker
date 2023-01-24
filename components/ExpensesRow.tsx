@@ -37,7 +37,7 @@ export const ExpensesRow = ({ expense }: Props) => {
             color: theme.colors.textPrimary,
           }}
         >
-          ${expense.amount}
+          $ {expense.amount}
         </Text>
       </View>
       <View
