@@ -4,6 +4,7 @@ import { ExpensesGroup } from "../types/expense";
 import { ExpensesRow } from "./ExpensesRow";
 import { theme } from "../theme/Theme";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Hr } from "./Hr";
 
 type Props = {
   groups: ExpensesGroup[];
@@ -64,23 +65,15 @@ export const ExpensesList = ({ groups }: Props) => {
           >
             {day}
           </Text>
-          <View
-            style={{
-              borderBottomColor: theme.colors.border,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              marginBottom: 12,
-            }}
-          />
+
+          <Hr />
+
           {expenses.map((expense) => (
             <ExpensesRow key={expense.id} expense={expense} />
           ))}
-          <View
-            style={{
-              borderBottomColor: theme.colors.border,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              marginBottom: 4,
-            }}
-          />
+
+          <Hr />
+
           <View
             style={{
               width: "100%",
