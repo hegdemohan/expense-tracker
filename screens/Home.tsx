@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import TabBarIcons from "../components/TabBarIcons";
 import { theme } from "../theme/Theme";
-import { Budget, Expenses, Settings, Income } from "./tabScreens";
+import { Budget, Expenses, Settings, Add } from "./tabScreens";
 const Tab = createBottomTabNavigator();
 
 export const Home = () => {
@@ -33,8 +33,8 @@ export const Home = () => {
         options={{
           tabBarIcon: (props) => <TabBarIcons type={"add"} {...props} />,
         }}
-        name="Income"
-        component={Income}
+        name="Add"
+        component={Add}
       />
       <Tab.Screen
         options={{

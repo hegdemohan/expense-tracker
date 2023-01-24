@@ -60,7 +60,7 @@ export const ListItem = ({
         {details}
       </TouchableOpacity>
     ),
-    []
+    [label, details]
   );
   if (swipeToDelete) return <Swipeable renderRightActions={() => item} />;
   else return item;

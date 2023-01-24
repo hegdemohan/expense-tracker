@@ -11,21 +11,12 @@ import {
   View,
 } from "react-native";
 import { ColorPicker, fromHsv } from "react-native-color-picker";
-import {
-  GestureHandlerRootView,
-  RectButton,
-  TextInput,
-} from "react-native-gesture-handler";
+import { RectButton, TextInput } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import uuid from "react-native-uuid";
 import { ListItem } from "../components/ListItem";
 import { theme } from "../theme/Theme";
-
-type Category = {
-  id: string;
-  name: string;
-  color: string;
-};
+import { Category } from "../types/category";
 
 export const Categories = () => {
   const [newCategory, setNewCategory] = useState("");
@@ -67,7 +58,7 @@ export const Categories = () => {
       <FlatList
         data={categories}
         renderItem={({ item }) => (
-          <Category
+          <CategoryListItem
             category={item}
             onPress={() =>
               setCategories(categories.filter(({ id }) => id !== item.id))
@@ -162,7 +153,7 @@ type CategoryProps = {
   onPress(): void;
 };
 
-const Category = ({ category, onPress }: CategoryProps) => {
+const CategoryListItem = ({ category, onPress }: CategoryProps) => {
   const { color, id, name } = category;
   return (
     <Swipeable
