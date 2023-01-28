@@ -1,9 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import { StatusBar, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CustomStatusBar } from "./components/customStatusBar/CustomBar";
 import { Categories } from "./screens/Categories";
 import { Home } from "./screens/Home";

@@ -3,7 +3,7 @@ import React from "react";
 import { ExpensesGroup } from "../types/expense";
 import { ExpensesRow } from "./ExpensesRow";
 import { theme } from "../theme/Theme";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Hr } from "./Hr";
 
 type Props = {
@@ -11,43 +11,11 @@ type Props = {
 };
 export const ExpensesList = ({ groups }: Props) => {
   return (
-    <View
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        paddingHorizontal: 16,
-        paddingTop: 16,
-      }}
-    >
-      <View style={{ display: "flex", alignItems: "center" }}>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginBottom: 16,
-          }}
-        >
-          <Text style={{ color: theme.colors.textPrimary, fontSize: 17 }}>
-            Total for:{" "}
-          </Text>
-          <TouchableOpacity style={{}}>
-            <Text style={{ color: theme.colors.primary, fontSize: 17 }}>
-              This week
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <Text style={{ color: theme.colors.textPrimary, fontSize: 28 }}>
-            $195
-          </Text>
-        </View>
-      </View>
-      {groups.map(({ day, expenses, total }) => (
+    <FlatList
+      data={groups}
+      keyExtractor={(item) => item.day}
+      style={{ height: "100%" }}
+      renderItem={({ item: { day, expenses, total } }) => (
         <View
           key={day}
           style={{
@@ -102,7 +70,7 @@ export const ExpensesList = ({ groups }: Props) => {
             </Text>
           </View>
         </View>
-      ))}
-    </View>
+      )}
+    />
   );
 };
