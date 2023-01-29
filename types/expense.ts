@@ -3,7 +3,7 @@ import { Recurrence } from "./reccurrence";
 
 export type Expense = {
   id: string;
-  amount: string;
+  amount: number;
   recurrence: Recurrence;
   date: Date;
   note: string;

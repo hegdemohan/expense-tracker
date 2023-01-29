@@ -4,7 +4,7 @@ import { ExpensesList } from "../../../components/ExpensesList";
 import { isRecurrence, Recurrence } from "../../../types/reccurrence";
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { theme } from "../../../theme/Theme";
-import WeeklyChart from "./charts/WeeklyChart";
+import { WeeklyChart } from "./charts/WeeklyChart";
 
 type Props = {
   bottomSheetRef: MutableRefObject<BottomSheet>;
@@ -56,7 +56,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
           <WeeklyChart
             expenses={[
               {
-                amount: "50",
+                amount: 50,
                 category: {
                   color: "#eea132",
                   id: "1",
@@ -68,7 +68,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
                 recurrence: Recurrence.None,
               },
               {
-                amount: "50",
+                amount: 50,
                 category: {
                   color: "#eea132",
                   id: "1",
@@ -80,7 +80,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
                 recurrence: Recurrence.None,
               },
               {
-                amount: "60",
+                amount: 60,
                 category: {
                   color: "#ecc132",
                   id: "1",
@@ -92,7 +92,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
                 recurrence: Recurrence.None,
               },
               {
-                amount: "60",
+                amount: 60,
                 category: {
                   color: "#ecc132",
                   id: "1",
@@ -116,7 +116,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
               total: 110,
               expenses: [
                 {
-                  amount: "50",
+                  amount: 50,
                   category: {
                     color: "#eea132",
                     id: "1",
@@ -128,7 +128,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
                   recurrence: Recurrence.None,
                 },
                 {
-                  amount: "60",
+                  amount: 60,
                   category: {
                     color: "#ecc132",
                     id: "1",
@@ -146,7 +146,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
               total: 234,
               expenses: [
                 {
-                  amount: "34",
+                  amount: 34,
                   category: {
                     color: "#bea132",
                     id: "1",
@@ -158,7 +158,7 @@ export const Insights = ({ bottomSheetRef }: Props) => {
                   recurrence: Recurrence.None,
                 },
                 {
-                  amount: "200",
+                  amount: 200,
                   category: {
                     color: "#edc132",
                     id: "1",
